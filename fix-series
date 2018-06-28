@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+read -p "Enter the path to the series folder -->" series_folder
+read -p "Enter the series Name -->" series_name
+cd "$series_folder"
+series_name=${series_name// /.}
+for file in *;do	
+	extension=${file##*.}
+	episode_name=${file^^}
+	episode_name=${episode_name// /.}
+	episode_name=${episode_name#*.S*}
+	episode_name=${episode_name%%.*}
+	episode_name=S${episode_name}
+	new_name=${series_name}.${episode_name}.${extension}
+	mv ${file} ${new_name}
+done
+
+	
